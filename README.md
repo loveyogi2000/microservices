@@ -2,19 +2,19 @@
 it is basically a web app that working in microservices architecture in ec2 in which i have used different docker container for each services running on seperate container
 
 
-Step 1: Install Nginx
+Step 1: Install Nginx using cmd 
 
-Copy code
 yum install nginx -y
+
 Step 2: Configure Nginx for reverse proxy
 
 Using this below cmd:
 cd /etc/nginx
 vim nginx.conf
+
 Then, paste the following content into the nginx.conf file:
 
-bash
-Copy code
+
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
@@ -153,18 +153,15 @@ docker run --name about -d -p 8083:80 loveyogi2000/about
 docker run --name login -d -p 8084:80 loveyogi2000/login
 Create a network for the containers to communicate:
 
-lua
-Copy code
+
 docker network create mynetwork
 Run the MongoDB container:
 
-css
-Copy code
+
 docker run --name mongodb -d -p 27017:27017 --net mynetwork mongo
 Run the Node.js application container:
 
-css
-Copy code
+
 docker run --name nodeapp -d -p 3000:3000 --net mynetwork loveyogi2000/nodeapp
 Once all containers are running, you can access the web app using http://your-ec2-instance-ip/home.
 
